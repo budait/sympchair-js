@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <link rel="stylesheet" href="/client/css/bulma/bulma.min.css">
+
+    <title>SympChair-JS session admin</title>
+  </head>
+  <body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              SympChair admin
+            </h1>
+            <h2 class="subtitle">
+              session id: <span id="sid"></span>
+            </h2>
+          </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="tile is-ancestor">
+          <div class="tile is-vertical is-8">
+            <div class="tile">
+              <div class="tile is-parent">
+                <article class="tile is-child box">
+                      <h1 class="title">Timer</h1>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <input class="input is-large" id="minutes" type="number" placeholder="minutes" value="15">
+                                </p>
+                              </div>
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <input class="input is-large" id="seconds" type="number" placeholder="seconds" value="00">
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field is-grouped is-grouped-centered">
+                                    <p class="control">
+                                      <a onclick="settime()" class="button is-primary is-medium">
+                                        Set Time
+                                      </a>
+                                    </p>
+                                    <p class="control">
+                                        <a onclick="start()" class="button is-primary is-medium">
+                                          Start
+                                        </a>
+                                    </p>
+                                    <p class="control">
+                                        <a onclick="pause()" class="button is-primary is-medium">
+                                          Pause
+                                        </a>
+                                    </p>
+                                  </div>
+                            </div>
+                          </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div class="tile is-vertical is-4">
+            <div class="tile">
+              <div class="tile is-parent">
+                <article class="tile is-child box">
+                    <nav class="panel">
+                        <p class="panel-heading">
+                          Client Time
+                        </p>
+                        <div class="panel-block">
+                            <span id="ctime"></span>    
+                        </div>
+                      </nav>                      
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    
+    <script src="/client/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client/js/common.js"></script>
+    <script src="/client/js/admin.js"></script>
+  </body>
+</html>
