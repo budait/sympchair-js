@@ -14,7 +14,7 @@ A simple timer tool for the session chair
 
 **NOTE**: this tool was designed to be run on an internal network during a symposium, therefore it does not have any authentication/authorization mechanisms. This means that anybody who knows the URL can use the admin panels!
 
-(If You must run this on the same network as other people, use simple http auth to restrict access to the panels.)
+(If You must run this on a public network, use simple http auth to restrict access to the panels and use SSL by using a reverse proxy that supports WebSockets)
 
 ## Development
 * use `npm run dev`
