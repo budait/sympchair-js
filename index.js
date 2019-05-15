@@ -23,6 +23,10 @@ const newsession = (id) =>{
   sessions.push(new Session(id))
 }
 
+const publicSessions = () =>{
+  return sessions.filter(i => i.display === true)
+}
+
 
 
 app.use('/client', express.static(path.join(__dirname, '/client')))
@@ -89,14 +93,20 @@ io.on('connection', (socket) => {
       break
     case 'getsessions':
       //reply to the sender
-      socket.emit('updatesessionlist', {sessions: sessions})
+      socket.emit('updatesessionlist', {sessions: publicSessions()})
       break
     case 'newsession':{
-      let sid = uuid()
+      let sid = ''
+      if(ev.id !== undefined && ev.id.length > 0){
+        sid = ev.id
+      } else {
+        sid = uuid()
+      }
       newsession(sid)
       //console.log(sessions)
+      socket.emit('sessioncreated', {id: sid})
       // this time emit for everyone (let other clients to update their session list)
-      io.emit('updatesessionlist', {sessions: sessions})
+      //io.emit('updatesessionlist', {sessions: sessions})
     }
       break
     case 'getsession':{
@@ -122,6 +132,10 @@ io.on('connection', (socket) => {
     let sidx = sessions.findIndex(i=>i.id === ev.id)
     if(sidx > -1){
       switch(ev.cmd){
+      case 'publishsession':
+        sessions[sidx].public = true
+        io.emit(io.emit('updatesessionlist', {sessions: publicSessions()}))
+        break
       case 'start':
         sessions[sidx].ticking = true
         break

@@ -4,11 +4,17 @@
 const socket = io()
 
 const newsession = ()=>{
-  socket.emit('client', {cmd:'newsession'})
+  let sid = $('#sid').val()
+  console.log(sid)
+  socket.emit('client', {cmd:'newsession', id: sid})
 }
 
 console.log('SympChair-JS loaded')
 socket.emit('client', {cmd: 'getsessions'})
+
+socket.on('sessioncreated',(ev)=>{
+  window.location.href = `/admin/${ev.id}`
+})
 
 
 socket.on('updatesessionlist',(ev)=>{
