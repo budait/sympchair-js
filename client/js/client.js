@@ -125,6 +125,7 @@ socket.on('scmd', (ev)=>{
     case 'settime':
       time = ev.time
       setTime(time)
+      setTimeout(scaleTimer, 500)
       socket.emit('client', {id: id, cmd: 'clienttime', time: time})
       break
     case 'start':
