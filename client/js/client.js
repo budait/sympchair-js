@@ -34,7 +34,7 @@ const setTime = (t) => {
 
 const init = ()=>{
   setTime()
-  scaleTimer()
+  setTimeout(scaleTimer, 500)
 }
 
 $(document).ready(init)
