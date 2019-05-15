@@ -10,6 +10,7 @@ const socket = io(window.location.host, {
 })
 
 let timediv = $('#time')
+let body = $('body')
 
 const scaleTimer =()=>{
   let fs = Math.floor($(window).width()/3)
@@ -27,8 +28,15 @@ $(window).resize(scaleTimer)
 const setTime = (t) => {
   if(t !== undefined){
     timediv.text(formatTime(time))
+    if(time < 120){
+      //flash()
+      body.css('background', '#996600')
+    } else {
+      body.css('background', '#000')
+    }
   } else {
     timediv.text('--:--')
+    body.css('background', '#000')
   }
 }
 
@@ -67,10 +75,7 @@ let ticker = ()=>{
   if(time>0){
     time-=1
     setTime(time)
-    if(time === 120){
-      flash()
-    }
-
+  
     socket.emit('client', {id: id, cmd: 'clienttime', time: time})
   } else{
     pause()
