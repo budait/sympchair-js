@@ -39,12 +39,13 @@ app.get('/', (req, res) => {
 
 app.get('/s/:id', (req,res)=>{
   let s = sessions.filter(i=>i.id === req.params.id)
-  if(s.length !== 1){
+  /*if(s.length !== 1){
     // no session exists with id, redirect to landing page
     res.redirect('/')
   } else{
     res.sendFile(__dirname + '/client/client.html')
-  }
+  }*/
+  res.sendFile(__dirname + '/client/client.html')
 })
 
 app.get('/admin/:id', (req,res)=>{
